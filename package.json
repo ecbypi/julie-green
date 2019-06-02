@@ -5,5 +5,8 @@
   "main": "index.js",
   "repository": "https://github.com/ecbypi/julie-green",
   "author": "Eduardo Gutierrez",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "qunit": "^2.9.2"
+  }
 }
