@@ -1,0 +1,9 @@
+{
+  "name": "julie-green",
+  "version": "0.0.1",
+  "description": "form validation",
+  "main": "index.js",
+  "repository": "https://github.com/ecbypi/julie-green",
+  "author": "Eduardo Gutierrez",
+  "license": "MIT"
+}
