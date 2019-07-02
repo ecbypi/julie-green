@@ -8,7 +8,36 @@
 </head>
 <body>
   <div id="qunit"></div>
-  <div id="qunit-fixture"></div>
+  <div id="qunit-fixture">
+    <form data-julie-me action="/signup" method="POST">
+      <label for="signup_email">Email</label>
+      <input required pattern="/\d+@\d+.com/" id="signup_email" type="email" name="signup[email]" />
+
+      <label for="signup_password">Password</label>
+      <input id="signup_password" type="password" name="signup[password]" />
+
+      <label for="signup_password_confirmation">Password</label>
+      <input id="signup_password_confirmation" type="password" name="signup[password_confirmation]" />
+
+      <input type="checkbox" id="signup_newsletter" />
+      <label for="signup_newsletter">Subscribe me to the newsletter</label>
+
+      <fieldset disabled>
+        <legend>Topics</legend>
+
+        <input type="checkbox" value="releases" name="signup[newsletter][]" id="signup_newsletter_releases" />
+        <label for="signup_newsletter_releases">Releases</label>
+
+        <input type="checkbox" value="marketing" name="signup[newsletter][]" id="signup_newsletter_marketing" />
+        <label for="signup_newsletter_marketing">Marketing</label>
+
+        <input type="checkbox" value="blog" name="signup[newsletter][]" id="signup_newsletter_blog" />
+        <label for="signup_newsletter_blog">Blog</label>
+      </fieldset>
+
+      <input type="submit" value="Sign Me Up" />
+    </form>
+  </div>
   <script src="../node_modules/qunit/qunit/qunit.js"></script>
   <script src="../julie-green.js"></script>
   <script src="tests.js"></script>
