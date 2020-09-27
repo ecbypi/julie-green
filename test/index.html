@@ -8,7 +8,94 @@
 </head>
 <body>
   <div id="qunit"></div>
-  <div id="qunit-fixture"></div>
+  <div id="qunit-fixture">
+    <form data-julie-me action="/signup" method="POST">
+      <label for="signup_email">Email</label>
+      <input id="signup_email" type="email" name="signup[email]" required pattern="\w+@\w+" />
+
+      <label for="signup_password">Password</label>
+      <input id="signup_password" type="password" name="signup[password]" required minlength="10" />
+
+      <label for="signup_password_confirmation">Password</label>
+      <input id="signup_password_confirmation" type="password" name="signup[password_confirmation]" required minlength="10" />
+
+      <label for="signup_birthday">Birthday</label>
+      <input id="signup_birthday" type="date" name="signup[birthday]" required disabled />
+
+      <fieldset required>
+        <legend>Language</legend>
+
+        <label for="signup_language_spanish">Spanish</label>
+        <input id="signup_language_spanish" value="spanish" type="radio" name="signup[language]" />
+
+        <label for="signup_language_english">English</label>
+        <input id="signup_language_english" value="english" type="radio" name="signup[language]" />
+
+        <label for="signup_language_boricua">Spanglish</label>
+        <input id="signup_language_boricua" value="boricua" type="radio" name="signup[language]" />
+      </fieldset>
+
+      <fieldset>
+        <legend>Phone Numbers</legend>
+
+        <fieldset>
+          <legend>Primary</legend>
+
+          <div>
+            <label for="signup_phone_numbers_0_type">Primary Type</label>
+            <select name="signup[phone_numbers][][type]" id="signup_phone_numbers_0_type">
+              <option></option>
+              <option value="home">Home</option>
+              <option value="work">Work</option>
+              <option value="mobile">Mobile</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="signup_phone_numbers_0_value">Primary Number</label>
+            <input type="text" name="signup[phone_numbers][][value]" id="signup_phone_numbers_0_value" />
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Backup</legend>
+
+          <div>
+            <label for="signup_phone_numbers_1_type">Backup Type</label>
+            <select name="signup[phone_numbers][][type]" id="signup_phone_numbers_1_type">
+              <option></option>
+              <option value="home">Home</option>
+              <option value="work">Work</option>
+              <option value="mobile">Mobile</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="signup_phone_numbers_1_value">Backup Number</label>
+            <input type="text" name="signup[phone_numbers][][value]" id="signup_phone_numbers_1_value" />
+          </div>
+        </fieldset>
+      </fieldset>
+
+      <input type="checkbox" id="signup_newsletter" />
+      <label for="signup_newsletter">Subscribe me to the newsletter</label>
+
+      <fieldset required disabled>
+        <legend>Topics</legend>
+
+        <input type="checkbox" value="releases" name="signup[newsletter][]" id="signup_newsletter_releases" />
+        <label for="signup_newsletter_releases">Releases</label>
+
+        <input type="checkbox" value="marketing" name="signup[newsletter][]" id="signup_newsletter_marketing" />
+        <label for="signup_newsletter_marketing">Marketing</label>
+
+        <input type="checkbox" value="blog" name="signup[newsletter][]" id="signup_newsletter_blog" />
+        <label for="signup_newsletter_blog">Blog</label>
+      </fieldset>
+
+      <input type="submit" value="Sign Me Up" />
+    </form>
+  </div>
   <script src="qunit.js"></script>
   <script src="../julie-green.js"></script>
   <script src="tests.js"></script>
