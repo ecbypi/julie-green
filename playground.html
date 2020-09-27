@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Julie Green Demo</title>
+</head>
+<body>
+  <form data-julie-me novalidate action="/profile" method="POST">
+    <div>
+      <label for="profile_email">Email</label>
+      <input id="profile_email" type="email" name="profile[email]" required pattern="\w+@\w+\.\w+" />
+    </div>
+
+    <div>
+      <label for="profile_password">Password</label>
+      <input id="profile_password" type="password" name="profile[password]" minlength="10"/>
+    </div>
+
+    <div>
+      <label for="profile_password_confirmation">Confirm Password</label>
+      <input id="profile_password_confirmation" type="password" name="profile[password_confirmation]" data-julie-match="profile_password" />
+    </div>
+
+    <div>
+      <label for="profile_birthday">Birthday</label>
+      <input id="profile_birthday" type="date" name="profile[birthday]" />
+    </div>
+
+    <fieldset>
+      <legend>Phone Numbers</legend>
+
+      <fieldset>
+        <legend>Primary</legend>
+
+        <div>
+          <label for="profile_phone_numbers_0_type">Primary Type</label>
+          <select name="profile[phone_numbers][][type]" id="profile_phone_numbers_0_type">
+            <option></option>
+            <option value="home">Home</option>
+            <option value="work">Work</option>
+            <option value="mobile">Mobile</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="profile_phone_numbers_0_value">Primary Number</label>
+          <input type="text" name="profile[phone_numbers][][value]" id="profile_phone_numbers_0_value" />
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Backup</legend>
+
+        <div>
+          <label for="profile_phone_numbers_1_type">Backup Type</label>
+          <select name="profile[phone_numbers][][type]" id="profile_phone_numbers_1_type">
+            <option></option>
+            <option value="home">Home</option>
+            <option value="work">Work</option>
+            <option value="mobile">Mobile</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="profile_phone_numbers_1_value">Backup Number</label>
+          <input type="text" name="profile[phone_numbers][][value]" id="profile_phone_numbers_1_value" />
+        </div>
+      </fieldset>
+    </fieldset>
+
+    <fieldset>
+      <legend>Preferences</legend>
+
+      <div>
+        <label for="profile_preferences_start_of_week">Start of Week</label>
+        <input id="profile_preferences_start_of_week" type="number" step="1" name="profile[preferences][start_of_week]" min="1" max="7" />
+      </div>
+
+      <fieldset required>
+        <legend>Appearance</legend>
+
+        <div>
+          <input type="radio" value="light" name="profile[preferences][theme]" id="profile_preferences_theme_light" />
+          <label for="profile_preferences_theme_light">Light</label>
+        </div>
+
+        <div>
+          <input type="radio" value="dark" name="profile[preferences][theme]" id="profile_preferences_theme_dark" />
+          <label for="profile_preferences_theme_dark">Dark</label>
+        </div>
+
+        <div>
+          <input type="radio" value="default" name="profile[preferences][theme]" id="profile_preferences_theme_default" />
+          <label for="profile_preferences_theme_default">System Default</label>
+        </div>
+      </fieldset>
+
+      <div>
+        <label for="profile_preferences_language">Language</label>
+        <select required name="profile[preferences][language]">
+          <option value="spanish">Spanish</option>
+          <option value="english">English</option>
+          <option value="boricua">Spanglish</option>
+        </select>
+      </div>
+    </fieldset>
+
+    <div>
+      <input type="checkbox" id="profile_newsletter" />
+      <label for="profile_newsletter">Subscribe me to the newsletter</label>
+    </div>
+
+    <fieldset disabled required data-profile-newsletter-topics>
+      <legend>Topics</legend>
+
+      <div>
+        <input type="checkbox" value="releases" name="profile[newsletter][]" id="profile_newsletter_releases" />
+        <label for="profile_newsletter_releases">Releases</label>
+      </div>
+
+      <div>
+        <input type="checkbox" value="marketing" name="profile[newsletter][]" id="profile_newsletter_marketing" />
+        <label for="profile_newsletter_marketing">Marketing</label>
+      </div>
+
+      <div>
+        <input type="checkbox" value="blog" name="profile[newsletter][]" id="profile_newsletter_blog" />
+        <label for="profile_newsletter_blog">Blog</label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Passphrases</legend>
+
+      <!-- FIXME: Add `<label>` elements -->
+      <div>
+        <input required type="text" name="profile[passphrases][]" />
+      </div>
+
+      <div>
+        <input minlength="5" maxlength="10" type="text" name="profile[passphrases][]" />
+      </div>
+
+      <div>
+        <input minlength="10" type="text" name="profile[passphrases][]" />
+      </div>
+    </fieldset>
+
+    <div>
+      <label></label>
+      <select multiple required name="profile[work_week][]">
+        <option value="monday">Monday</option>
+        <option value="tuesday">Tuesday</option>
+        <option value="wednesday">Wednesday</option>
+        <option value="thursday">Thursday</option>
+        <option value="friday">Friday</option>
+        <option value="saturday">Saturday</option>
+        <option value="sunday">Sunday</option>
+      </select>
+
+
+    <input type="submit" value="Sign Me Up" />
+  </form>
+
+  <script src="julie-green.js"></script>
+  <script>
+    (function() {
+      "use strict";
+
+      window.formExample = document.querySelector("[data-julie-me]");
+
+      window.julieExample = new JulieGreen(formExample);
+
+      var subscriptionToggleInput = formExample.querySelector("#profile_newsletter");
+      var topicsFieldset = formExample.querySelector("[data-profile-newsletter-topics]");
+
+      subscriptionToggleInput.addEventListener("change", function(event) {
+        topicsFieldset.disabled = !event.target.checked;
+      });
+    })();
+  </script>
+</body>
+</html>
