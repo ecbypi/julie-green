@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Julie Green Demo</title>
+</head>
+<body>
+  <form data-julie-me novalidate action="/profile" method="POST">
+    <div>
+      <label for="profile_email">Email</label>
+      <input id="profile_email" type="email" name="profile[email]" required pattern="\w+@\w+\.\w+" />
+    </div>
+
+    <div>
+      <label for="profile_password">Password</label>
+      <input id="profile_password" type="password" name="profile[password]" minlength="10"/>
+    </div>
+
+    <div>
+      <label for="profile_password_confirmation">Confirm Password</label>
+      <input id="profile_password_confirmation" type="password" name="profile[password_confirmation]" data-julie-match="profile_password" />
+    </div>
+
+    <div>
+      <label for="profile_birthday">Birthday</label>
+      <input id="profile_birthday" type="date" name="profile[birthday]" />
+    </div>
+
+    <fieldset>
+      <legend>Preferences</legend>
+
+      <div>
+        <label for="profile_preferences_start_of_week">Start of Week</label>
+        <input id="profile_preferences_start_of_week" type="number" step="1" name="profile[preferences][start_of_week]" min="1" max="7" />
+      </div>
+
+      <fieldset>
+        <legend>Appearance</legend>
+
+        <div>
+          <input type="radio" value="light" name="profile[preferences][theme]" id="profile_preferences_theme_light" />
+          <label for="profile_preferences_theme_light">Light</label>
+        </div>
+
+        <div>
+          <input type="radio" value="dark" name="profile[preferences][theme]" id="profile_preferences_theme_dark" />
+          <label for="profile_preferences_theme_dark">Dark</label>
+        </div>
+
+        <div>
+          <input type="radio" value="default" name="profile[preferences][theme]" id="profile_preferences_theme_default" />
+          <label for="profile_preferences_theme_default">System Default</label>
+        </div>
+      </fieldset>
+    </fieldset>
+
+    <div>
+      <input type="checkbox" id="profile_newsletter" />
+      <label for="profile_newsletter">Subscribe me to the newsletter</label>
+    </div>
+
+    <fieldset disabled>
+      <legend>Topics</legend>
+
+      <div>
+        <input type="checkbox" value="releases" name="profile[newsletter][]" id="profile_newsletter_releases" />
+        <label for="profile_newsletter_releases">Releases</label>
+      </div>
+
+      <div>
+        <input type="checkbox" value="marketing" name="profile[newsletter][]" id="profile_newsletter_marketing" />
+        <label for="profile_newsletter_marketing">Marketing</label>
+      </div>
+
+      <div>
+        <input type="checkbox" value="blog" name="profile[newsletter][]" id="profile_newsletter_blog" />
+        <label for="profile_newsletter_blog">Blog</label>
+      </div>
+    </fieldset>
+
+
+    <input type="submit" value="Sign Me Up" />
+  </form>
+
+  <script src="julie-green.js"></script>
+  <script>
+    (function() {
+      "use strict";
+
+      var form = document.querySelector("[data-julie-me]");
+
+      window.julieExample = new JulieGreen(form);
+    })();
+  </script>
+</body>
+</html>
