@@ -168,11 +168,17 @@
     this.validators = [];
     detectValidators(this);
 
+    this.advice = new Advice(this);
+
     // TODO: Setup event listeners if this input does not have a `<form>`
   }
 
   Appendage.prototype.value = function() {
     return this.element.value;
+  };
+
+  Appendage.prototype.adviceElementTarget = function() {
+    return this.element;
   };
 
   Appendage.prototype.validate = function() {
@@ -211,6 +217,48 @@
   DigitsAppendage.prototype.value = function() {
     return this.nodeList.value;
   };
+
+  DigitsAppendage.prototype.adviceElementTarget = function() {
+    var firstParent = this.element.parentNode;
+    var haveSameParent = true;
+    var element;
+
+    for ( var i = 0; i < this.elements.length; i++ ) {
+      var element = this.elements[i];
+
+      haveSameParent = element.parentNode === firstParent;
+    }
+
+    var lastElement = this.elements[this.elements.length - 1];
+
+    if ( haveSameParent ) {
+      return lastElement;
+    } else {
+      return lastElement.parentNode;
+    }
+  };
+
+  // FIXME: look into whether we should set `aria-labeled-by` before there's advice content
+  function Advice(appendage) {
+    this.appendage = appendage;
+    this.element = locateAdviceElement(appendage)
+  }
+
+  function locateAdviceElement(appendage) {
+    var input = appendage.adviceElementTarget();
+    var appendageName = appendage.name;
+    var adviceSelector = "[data-julie-advice=" + appendageName + "]";
+
+    var adviceElement = input.parentElement.querySelector(adviceSelector);
+
+    if ( ! adviceElement ) {
+      adviceElement = document.createElement("div");
+      adviceElement.setAttribute("data-julie-advice", appendageName);
+      input.parentNode.insertBefore(adviceElement, input.nextSibling);
+    }
+
+    return adviceElement;
+  }
 
   function Validator(name, options, test) {
     this.name = name;
